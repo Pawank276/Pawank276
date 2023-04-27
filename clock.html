@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clock</title>
+    <link rel="stylesheet" href="clock_style.css">
+    
+</head>
+<body>
+    <div class="clock">
+        <div class="hour">
+            <div class="hr" id="hr"></div>
+        </div>
+        <div class="min">
+            <div class="mn" id="mn"></div>
+        </div>
+        <div class="sec">
+            <div class="sc" id="sc"></div>
+        </div>
+    </div>
+
+    <div class="digital">
+        <span id="hrs"></span>
+        <span id="col">:</span>
+        <span id="mns"></span>
+        <span id="col">:</span>
+        <span id="secs"></span>
+        <span id="Session">PM</span>
+        
+    </div>
+    <script>
+        var deg = 6
+        var hr = document.querySelector("#hr");
+        var mn = document.querySelector("#mn");
+        var sc = document.querySelector("#sc");
+        setInterval(
+            function(){
+                var day = new Date();
+                var ss = day.getSeconds()* 6;
+                var mm = day.getMinutes()* 6;
+                var hh = day.getHours()*30 + Math.round(mm / 12);
+                var digitalhour = day.getHours()
+                var digitalminute= day.getMinutes()
+                var digitalseconds = day.getSeconds()
+                hr.style.transform = "rotate("+hh+ "deg)";
+                mn.style.transform = "rotate("+mm+ "deg)";
+                sc.style.transform = "rotate("+ss+ "deg)";
+
+                    var session = document.getElementById("Session");
+
+                    if(digitalhour>= 12){
+                        session.innerHTML = "PM";
+                    }else{
+                        session.innerHTML = "AM";
+                    }
+
+                    if(digitalhour> 12){
+                        digitalhour = digitalhour -12;
+                    }
+                    
+                    document.getElementById("hrs").innerHTML = digitalhour;
+                    document.getElementById("mns").innerHTML = digitalminute;
+                    document.getElementById("secs").innerHTML = digitalseconds;
+                },1000
+        )
+
+        
+       
+    </script>
+</body>
+</html>
